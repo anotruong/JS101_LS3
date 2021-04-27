@@ -1,0 +1,100 @@
+const readline = require('readline-sync');
+const VALID_OPTIONS = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+const VALID_CHOICES = ['r', 'p', 's', 'l', 'sp'];
+let userScore = 0;
+let compScore = 0;
+
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
+
+function displayWinner(choice, computerChoice) {
+  prompt(`You chose ${choice}, computer chose ${computerChoice}`);
+}
+/*Rock wins against Lizard and Scissor /loses paper, spock
+Paper wins against Spock and Rock / loses scissor, lizard
+Scissors wins against Paper and Lizard / loses rock, spock,
+Lizard wins against Spock and Paper / loses  scissor,  rock
+Spock wins against Scissors and Rock./ loses paper, lizard
+*/
+
+let winCombo = {
+  rock: ['scissors' || 'lizard'],
+  paper: ['rock' || 'spock'],
+  scissors: ['paper' || 'lizard'],
+  lizard: ['spock' || 'paper'],
+  spock: ['paper' || 'lizard']
+};
+
+function win(choice, computerChoice) {
+  userScore++;
+  console.log(`You wins! Current score is user: ${userScore} | computer: ${compScore}`);
+}
+
+function lose(choice, computerChoice) {
+  compScore++;
+  console.log(`Computer wins! Current score is user: ${userScore} | computer: ${compScore}`);
+}
+
+while (true) {
+
+  prompt(`Choose one: ${VALID_OPTIONS.join(', ')} \n You can use the first one or two letters as answers.`);
+  let abbreviations = readline.question();
+
+  while (!VALID_CHOICES.includes(abbreviations)) {
+    prompt("That's not a valid choice");
+    abbreviations = readline.question();
+  }
+
+  let choice;
+  switch (abbreviations) {
+    case 'r':
+      choice = 'rock';
+      break;
+    case 's':
+      choice = 'scissors';
+      break;
+    case 'p':
+      choice = 'paper';
+      break;
+    case 'sp':
+      choice = 'spock';
+      break;
+    case 'l':
+      choice = 'lizard';
+      break;
+  }
+
+  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
+  let computerChoice = VALID_CHOICES[randomIndex];
+
+switch game (choice, computerChoice) {
+  case 'rock' && winCombo.rock:
+  case 'paper' && winCombo.paper:
+  case 'scissors' && winCombo.scissors:
+  case 'spock' && winCombo.spock:
+  case 'lizard' && winCombo.lizard:
+    win(choice, computerChoice)
+
+  if ((choice === 'rock' && computerChoice === winCombo.rock) ||
+      (choice === 'paper' && computerChoice === winCombo.paper) ||
+      (choice === 'scissors' && computerChoice === winCombo.scissors) ||
+      (choice === 'lizard' && computerChoice === winCombo.lizard) ||
+      (choice === 'spock' && computerChoice === winCombo.spock))  {
+    win(choice, computerChoice);
+  } else if (choice === computerChoice) {
+    prompt("It's a tie");
+  } else {
+    lose(choice, computerChoice);
+  }
+
+  displayWinner(choice, computerChoice);
+
+  prompt('Do you want to play again? (y/n)?');
+  let answer = readline.question().toLowerCase();
+  while (answer[0] !== 'n' && answer[0] !== 'y') {
+    prompt('Please enter "y" or "n".');
+    answer = readline.question().toLowerCase();
+  }
+  if (answer[0] !== 'y') break;
+}

@@ -1,0 +1,22 @@
+{
+
+	"ENG":	{
+		"welcome": "Welcome to Calculator!",
+		"step1": "What's the first number you want to use?",
+		"step2": "What's the second number you want to use?",
+		"operation": "What operator do you want to use?\n 1) Add 2) Sub 3) Multi 4) Divide",
+		"invalidNumber": "Try again my guy",
+		"chooseThese": "You can only choose 1, 2, 3, or 4",
+		"restart": "Do you want to go again?\n y or n?"
+		},
+
+	"FRE":	{
+        	"welcome": "Bienvenue dans la Calculatrice!",
+       	 	"step1": "Quel est votre premier numéro?",
+        	"step2": "Quelle est ta seconde numéro?",
+        	"operation": "Quelle opération souhaitez-vous utiliser??\n 1) Add 2) Sub 3) Multi 4) Divide",        "invalidNumber": "Try again my guy",
+        	"invalidNumber": "Essayez encore, mon gars"
+		"chooseThese": "Vous ne pouvez que choisir 1, 2, 3, or 4",
+        	"restart": "Voulez-vous recommencer??\n y or n?"
+        	}
+}

@@ -1,0 +1,77 @@
+const readline = require('readline-sync');
+const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+const VALID_ABBREVIATIONS = ['r', 'p', 's', 'l', 'sp'];
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
+
+function displayWinner(choice, computerChoice) {
+  prompt(`You chose ${choice}, computer chose ${computerChoice}`);
+
+  /*Rock wins against Lizard and Scissor /loses paper, spock
+Paper wins against Spock and Rock / loses scissor, lizard
+Scissors wins against Paper and Lizard / loses rock, spock,
+Lizard wins against Spock and Paper / loses  scissor,  rock
+Spock wins against Scissors and Rock./ loses paper, lizard
+*/
+  if ((choice === 'rock' && computerChoice === ('scissors' || 'lizard')) ||
+      (choice === 'paper' && computerChoice === ('rock' || 'spock')) ||
+      (choice === 'scissors' && computerChoice === ('paper' || 'lizard')) ||
+      (choice === 'lizard' && computerChoice === ('spock' || 'paper')) ||
+      (choice === 'spock' && computerChoice === ('scissors' || 'rock')))  {
+    prompt('You win!');
+  } else if ((choice === 'rock' && computerChoice === ('paper' || 'spock')) ||
+      (choice === 'paper' && computerChoice === ('scissors' || 'lizard')) ||
+      (choice === 'scissors' && computerChoice === ('rock' || 'spock')) ||
+      (choice === 'lizard' && computerChoice === ('scissors' || 'rock')) ||
+      (choice === 'spock' && computerChoice === ('paper' || 'lizard')))  {
+    prompt('Computer wins!');
+  } else {
+    prompt("It's a tie!");
+  }
+
+}
+
+while (true) {
+
+  prompt(`Choose one: ${VALID_CHOICES.join(', ')} \n You can use the first one or two letters as answers.`);
+  let abbreviations = readline.question();
+
+  while ((!VALID_CHOICES.includes(abbreviations)) || (!VALID_ABBREVIATIONS.includes(abbreviations))) {
+    prompt("That's not a valid choice");
+    abbreviations = readline.question();
+  }
+
+  let choice;
+  switch (abbreviations) {
+    case 'r':
+      choice = 'rock';
+      break;
+    case 's':
+      choice = 'scissors';
+      break;
+    case 'p':
+      choice = 'paper';
+      break;
+    case 'sp':
+      choice = 'spock';
+      break;
+    case 'l':
+      choice = 'lizard';
+      break;
+  }
+
+  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
+  let computerChoice = VALID_CHOICES[randomIndex];
+
+
+  displayWinner(choice, computerChoice);
+
+  prompt('Do you want to play again? (y/n)?');
+  let answer = readline.question().toLowerCase();
+  while (answer[0] !== 'n' && answer[0] !== 'y') {
+    prompt('Please enter "y" or "n".');
+    answer = readline.question().toLowerCase();
+  }
+  if (answer[0] !== 'y') break;
+}

@@ -1,0 +1,84 @@
+const readline = require('readline-sync');
+const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+const VALID_ABBREVIATIONS = ['r', 'p', 's', 'l', 'sp'];
+
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
+
+function displayWinner(choice, computerChoice) {
+  prompt(`You chose ${choice}, computer chose ${computerChoice}`);
+}
+
+let winCombo = {
+  rock: {
+    defeats: 'scissors' || 'lizard'
+  },
+  paper: {
+    defeats: 'rock' || 'spock'
+  },
+  scissors: {
+    defeats: 'paper' || 'lizard'
+  },
+  lizard: {
+    defeats: 'spock' || 'paper'
+  },
+  spock: {
+    defeats: 'paper' || 'lizard'
+  }
+};
+
+while (true) {
+
+  prompt(`Choose one: ${VALID_CHOICES.join(', ')} \n You can use the first one or two letters as answers.`);
+  let abbreviations = readline.question();
+
+  while (!VALID_ABBREVIATIONS.includes(abbreviations)) {
+    prompt("That's not a valid choice");
+    abbreviations = readline.question();
+  }
+
+  let choice;
+  switch (abbreviations) {
+    case 'r':
+      choice = 'rock';
+      break;
+    case 's':
+      choice = 'scissors';
+      break;
+    case 'p':
+      choice = 'paper';
+      break;
+    case 'sp':
+      choice = 'spock';
+      break;
+    case 'l':
+      choice = 'lizard';
+      break;
+  }
+
+  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
+  let computerChoice = VALID_CHOICES[randomIndex];
+
+  if ((choice === 'rock' && computerChoice === winCombo.rock.defeats) ||
+      (choice === 'paper' && computerChoice === winCombo.paper.defeats) ||
+      (choice === 'scissors' && computerChoice === winCombo.scissors.defeats) ||
+      (choice === 'lizard' && computerChoice === winCombo.lizard.defeats) ||
+      (choice === 'spock' && computerChoice === winCombo.spock.defeats))  {
+    prompt('You win!');
+  } else if (choice === computerChoice) {
+    prompt("It's a tie");
+  } else {
+    prompt('Computer wins!');
+  }
+
+  displayWinner(choice, computerChoice);
+
+  prompt('Do you want to play again? (y/n)?');
+  let answer = readline.question().toLowerCase();
+  while (answer[0] !== 'n' && answer[0] !== 'y') {
+    prompt('Please enter "y" or "n".');
+    answer = readline.question().toLowerCase();
+  }
+  if (answer[0] !== 'y') break;
+}

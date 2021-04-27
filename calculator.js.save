@@ -1,0 +1,52 @@
+Given a pair of numbers.
+
+Iterate once.
+-create new varable, result, that adds two numbers together. 
+return result
+
+START
+
+SET RESULT  = number1 + number2
+PRINT RESULT;
+
+-interate once
+-while looping through the array.length as the counter
+	-let the result be the first string added to the next. 
+	-print a string.concat. 
+START
+
+SET ITERATOR = 1
+
+WHILE ITERATOR <= ARRAY.LENGTH
+	SET RESULT = first element added to the next element and so on.
+
+	iterator = iterator + 1
+PRINT RESULT
+
+
+-interate once.
+- for loop over the array.length
+	-if array[i] % === 1
+		-return that array
+	-otherwise 
+		-continue. 
+START
+
+ITERATOR = 1
+SET RESULT = EMPTY ARRAY
+
+FOR ARRAY.LENGTH
+	IF THE INDEX IS AN ODD NUMBER
+		PUSHTHAT ELEMENT INTO RESULT
+	OTHERWISE
+		CONTINUE;
+
+PRINT RESULT.
+
+
+a function that returns the sum of two numbers
+a function that takes an array of strings, and returns a string that is
+ all those strings concatenated together
+a function that takes an array of integers, and returns a new array
+ with every other element
+
