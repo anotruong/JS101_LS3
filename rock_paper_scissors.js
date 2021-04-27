@@ -9,8 +9,6 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-setInterval(prompt,9000);
-
 let winCombo = {
   rock: ['scissors', 'lizard'],
   paper: ['rock', 'spock'],
@@ -18,13 +16,6 @@ let winCombo = {
   lizard: ['spock', 'paper'],
   spock: ['scissors', 'rock']
 };
-
-/* setTimeOut(win, 3000);
-
-setTimeout(lose, 3000);
-
-setTimeout(tie, 3000);
-*/
 
 function win(choice, computerChoice) {
   userScore++;
