@@ -1,7 +1,7 @@
 const readline = require('readline-sync');
 const VALID_OPTIONS = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-const abbreviations = ['rk', 'pr', 'ss', 'ld', 'sk'];
-const VALID_CHOICES = VALID_OPTIONS.concat(abbreviations);
+const OPTIONS_SHORTHAND = ['rk', 'pr', 'ss', 'ld', 'sk'];
+const VALID_CHOICES = VALID_OPTIONS.concat(OPTIONS_SHORTHAND);
 let userScore = 0;
 let compScore = 0;
 
@@ -31,9 +31,9 @@ function lose(choice, computerChoice) {
   prompt(`You chose ${choice} and the computer chose ${computerChoice}.\n Computer wins! Current score is user: ${userScore} | computer: ${compScore}`);
 }
 
-prompt(`Welcome to Rock, Paper, Scissors, Lizard, Spock!`)
+prompt(`Welcome to Rock, Paper, Scissors, Lizard, Spock!`);
 
-prompt(`Can you beat the computer?\n Whoever gets to 5 first wins!`);
+prompt(`Can you beat the computer?\n Whoever gets to 5 points first wins!`);
 
 
 while (true) {
@@ -63,7 +63,7 @@ while (true) {
     case 'ld':
       choice = 'lizard';
       break;
-   default:
+    default:
       choice = answer;
       break;
   }
