@@ -4,12 +4,21 @@ const OPTIONS_SHORTHAND = ['rk', 'pr', 'ss', 'ld', 'sk'];
 const VALID_CHOICES = VALID_OPTIONS.concat(OPTIONS_SHORTHAND);
 let userScore = 0;
 let compScore = 0;
+let WIN_SCORE = 5;
 
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-let winCombo = {
+let shorthandToFullName = {
+  rk: "rock",
+  ss: "scissors",
+  pr: "paper",
+  ld: "lizard",
+  sk: "spock"
+};
+
+const winCombo = {
   rock: ['scissors', 'lizard'],
   paper: ['rock', 'spock'],
   scissors: ['paper', 'lizard'],
@@ -33,7 +42,7 @@ function lose(choice, computerChoice) {
 
 prompt(`Welcome to Rock, Paper, Scissors, Lizard, Spock!`);
 
-prompt(`Can you beat the computer?\n Whoever gets to 5 points first wins!`);
+prompt(`Can you beat the computer?\n Whoever gets to ${WIN_SCORE} points first wins!`);
 
 
 while (true) {
@@ -43,39 +52,14 @@ while (true) {
 
   while (!VALID_CHOICES.includes(answer)) {
     prompt("That's not a valid choice");
-    answer = readline.question();
-  }
-
-  let choice;
-  switch (answer) {
-    case 'rk':
-      choice = 'rock';
-      break;
-    case 'ss':
-      choice = 'scissors';
-      break;
-    case 'pr':
-      choice = 'paper';
-      break;
-    case 'sk':
-      choice = 'spock';
-      break;
-    case 'ld':
-      choice = 'lizard';
-      break;
-    default:
-      choice = answer;
-      break;
+    answer = readline.question().toLowerCase();
   }
 
   let randomIndex = Math.floor(Math.random() * VALID_OPTIONS.length);
   let computerChoice = VALID_OPTIONS[randomIndex];
+  let choice = shorthandToFullName[answer];
 
-  if ((choice === 'rock' && winCombo.rock.includes(computerChoice)) ||
-      (choice === 'paper' && winCombo.paper.includes(computerChoice)) ||
-      (choice === 'scissors' && winCombo.scissors.includes(computerChoice)) ||
-      (choice === 'lizard' && winCombo.lizard.includes(computerChoice)) ||
-      (choice === 'spock' && winCombo.spock.includes(computerChoice)))  {
+  if (winCombo[choice].includes(computerChoice)) {
     win(choice, computerChoice);
   } else if (choice === computerChoice) {
     tie(choice, computerChoice);
@@ -83,11 +67,11 @@ while (true) {
     lose(choice, computerChoice);
   }
 
-  if (userScore === 5) {
+  if (userScore === WIN_SCORE) {
     prompt(`Congratulations! You've beat the computer with the total of ${userScore}!`);
     userScore = 0;
     compScore = 0;
-  } else if (compScore === 5) {
+  } else if (compScore === WIN_SCORE) {
     prompt(`Aww, you lost. The computer won with the total of ${compScore}.`);
     userScore = 0;
     compScore = 0;
@@ -101,4 +85,3 @@ while (true) {
   }
   if (restart[0] !== 'y') break;
 }
-
